@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/management_panel">
+
+    <fragment
+        android:id="@+id/studentListFragment"
+        android:name="com.example.asystent.fragments.list.StudentListFragment"
+        android:label="Student List"
+        tools:layout="@layout/fragment_student_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addStudent" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudent"
+        android:name="com.example.asystent.fragments.add.AddStudentFragment"
+        android:label="Add Student"
+        tools:layout="@layout/fragment_add_student" >
+        <action
+            android:id="@+id/action_addStudent_to_management_panel"
+            app:destination="@id/management_panel" />
+    </fragment>
+    <fragment
+        android:id="@+id/management_panel"
+        android:name="com.example.asystent.management_panel"
+        android:label="Management Panel"
+        tools:layout="@layout/fragment_management_panel" >
+        <action
+            android:id="@+id/action_management_panel_to_addStudent"
+            app:destination="@id/addStudent" />
+        <action
+            android:id="@+id/action_management_panel_to_addClass"
+            app:destination="@id/addClass" />
+        <action
+            android:id="@+id/action_management_panel_to_studentListFragment"
+            app:destination="@id/studentListFragment" />
+        <action
+            android:id="@+id/action_management_panel_to_classes_list"
+            app:destination="@id/classes_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/addClass"
+        android:name="com.example.asystent.fragments.add.addClass"
+        android:label="Add Class"
+        tools:layout="@layout/fragment_add_class" >
+        <argument
+            android:name="studentList"
+            app:argType="com.example.asystent.data.Student.Student[]" />
+        <action
+            android:id="@+id/action_addClass_to_management_panel"
+            app:destination="@id/management_panel" />
+        <action
+            android:id="@+id/action_addClass_to_addStudentToClass"
+            app:destination="@id/addStudentToClass" />
+    </fragment>
+    <fragment
+        android:id="@+id/classes_list"
+        android:name="com.example.asystent.fragments.list.ClassListFragment"
+        android:label="Classes List"
+        tools:layout="@layout/fragment_classes_list" >
+        <action
+            android:id="@+id/action_classes_list_to_addClass"
+            app:destination="@id/addClass" />
+        <action
+            android:id="@+id/action_classes_list_to_addStudentToClass"
+            app:destination="@id/addStudentToClass" />
+        <argument
+            android:name="selectedClass"
+            app:argType="com.example.asystent.data.Classes.Classes" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentToClass"
+        android:name="com.example.asystent.fragments.list.addStudentToClass"
+        android:label="Add Student To Class"
+        tools:layout="@layout/fragment_add_student_to_class" >
+        <argument
+            android:name="selectedClass"
+            app:argType="com.example.asystent.data.Classes.Classes" />
+        <action
+            android:id="@+id/action_addStudentToClass_to_studentGrades"
+            app:destination="@id/studentGrades" />
+        <action
+            android:id="@+id/action_addStudentToClass_self"
+            app:destination="@id/addStudentToClass" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentGrades"
+        android:name="com.example.asystent.fragments.add.StudentGradesFragment"
+        android:label="Add Grades"
+        tools:layout="@layout/fragment_student_grades" >
+        <action
+            android:id="@+id/action_studentGrades_to_addStudentToClass"
+            app:destination="@id/addStudentToClass" />
+        <argument
+            android:name="studentClass"
+            app:argType="com.example.asystent.data.StudentClasses.StudentClasses" />
+    </fragment>
+</navigation>
